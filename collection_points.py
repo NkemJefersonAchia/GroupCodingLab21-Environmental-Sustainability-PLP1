@@ -11,4 +11,5 @@ class CollectionPoints(DBBase):
     def request_pickup(self, username):
         name = input("Enter collection center name: ")
         weight = input("Enter weight for pickup (kg): ")
-        print(f"Pickup request sent to {name} for {weight}kg. [Simulation only]")
+        PhoneNumber = input("Enter your phone number: ")
+        print(f"Pickup request sent to {name} for {weight}kg. \n You will be contacted via {PhoneNumber} shortly!!")
