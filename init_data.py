@@ -27,7 +27,7 @@ def populate_initial():
             "INSERT IGNORE INTO centers (name, location, status, distance) "
             "VALUES (%s, %s, %s, %s)",
             centers
-        )
+        )111
         cur.executemany(
             "INSERT IGNORE INTO tips (tip) VALUES (%s)",
             [(t,) for t in tips]
