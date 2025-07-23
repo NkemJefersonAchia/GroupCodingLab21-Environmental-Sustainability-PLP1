@@ -9,6 +9,10 @@ def populate_initial():
     centers = [
         ("EcoCenter", "Bugesera", "open", 2.5),
         ("GreenHub", "Kigali", "closed", 4.0),
+        ("AgroPlast Ltd", "Kayonza", "open", 7.8),
+        ("RecycleSmart", "Kamonyi", "open", 9.3),
+        ("RecycleDepot", "Musanze", "closed", 12.7),
+        ("Wastezon", "Huye", "open", 22.3)
     ]
     tips = [
         "Sort plastics from metals.",
@@ -27,7 +31,7 @@ def populate_initial():
             "INSERT IGNORE INTO centers (name, location, status, distance) "
             "VALUES (%s, %s, %s, %s)",
             centers
-        )111
+        )
         cur.executemany(
             "INSERT IGNORE INTO tips (tip) VALUES (%s)",
             [(t,) for t in tips]
