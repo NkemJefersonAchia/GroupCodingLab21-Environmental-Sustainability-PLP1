@@ -17,6 +17,9 @@ def populate_initial():
         "Reuse before recycling."
         "Check labels"
         "Recycle glass by color"
+        "DIY from waste"
+        "Use drop-off points"
+        "Carry a reusable bag"
     ]
     rewards = [
         ("Cash voucher", 1000),
