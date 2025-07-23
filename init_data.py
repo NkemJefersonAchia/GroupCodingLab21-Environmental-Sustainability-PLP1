@@ -21,8 +21,10 @@ def populate_initial():
         "Reuse before recycling."
     ]
     rewards = [
-        ("Cash voucher", 1000),
-        ("Gift coupon", 5000),
+        ("Airtime (500rwf)", 250),
+        ("Gift card (4000rwf)", 5000),
+        ("Chapati (10pcs)", 50),
+        ("Milk", 75)
     ]
 
     with db.conn() as conn:
