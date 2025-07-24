@@ -1,15 +1,33 @@
+
 #!/usr/bin/python3
-"""Log recyclables and award points."""
+"""Log recyclables and show RWF rate (not total cash value)."""
 
 from db import DBBase
 
 class LogRecyclables(DBBase):
-    PRICES = {'plastic': 10, 'glass': 15, 'paper': 5, 'can': 20}
+    # RWF per kilogram for each type
+    RATES = {
+        'plastic': 410,
+        'glass':   40,
+        'paper':   210,
+        'can':     435
+    }
 
     def log(self, username):
         t = input("Type (plastic/glass/paper/can): ").strip().lower()
-        kg = float(input("Weight (kg): "))
-        pts = int(self.PRICES.get(t, 0) * kg)
+        rate = self.RATES.get(t)
+        if rate is None:
+            print("Unknown type:", t)
+            return
+
+        try:
+            kg = float(input("Weight (kg): ").strip())
+        except ValueError:
+            print("Invalid weight.")
+            return
+
+        pts = int(rate * kg * 0.25)  # points = 25% of total RWF
+
         with self.conn() as conn:
             cur = conn.cursor()
             cur.execute("""
@@ -18,4 +36,6 @@ class LogRecyclables(DBBase):
               ON DUPLICATE KEY UPDATE points = points + %s
             """, (username, pts, pts))
             conn.commit()
-        print(f"You earned {pts} points.")
+
+        print(f"Rate: {rate} RWF/kg")
+        print(f"Points earned: {pts}")
