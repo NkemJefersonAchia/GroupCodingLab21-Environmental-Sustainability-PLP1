@@ -19,6 +19,11 @@ def populate_initial():
         "Clean recyclables before dropping.",
         "Avoid hazardous waste in recycling bins.",
         "Reuse before recycling."
+        "Check labels"
+        "Recycle glass by color"
+        "DIY from waste"
+        "Use drop-off points"
+        "Carry a reusable bag"
     ]
     rewards = [
         ("Airtime (500rwf)", 250),
