@@ -24,7 +24,7 @@ class DBBase:
         finally:
             conn.close()
 
-def init_schema(self):
+    def init_schema(self):
         with self.conn() as conn:
             cur = conn.cursor()
             cur.execute("""
@@ -52,5 +52,3 @@ def init_schema(self):
                     cost INT
                 )""")
             conn.commit()
-
-   
