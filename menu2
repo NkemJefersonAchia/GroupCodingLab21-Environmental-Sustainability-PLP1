@@ -1,0 +1,25 @@
+# #AFRI_RECYCLE(WHICH RECYCLE WASTES TO SELL)
+
+def choose_recyclable():
+    print("What type of recyclable would you like to sell?")
+    options = ["Plastic", "Paper", "Metal", "Glass", "Rubber"]
+    for idx, opt in enumerate(options, start=1):
+        print(f"{idx}. {opt}")
+
+    while True:
+        choice = input("Enter the number of your choice: ")
+        if choice.isdigit():
+            choice = int(choice)
+            if 1 <= choice <= len(options):
+                return options[choice - 1]
+        print("Invalid input. Please enter a number from 1 to 5.")
+
+
+def main():
+    print("=== AFRI-RECYCLE ===")
+    rtype = choose_recyclable()
+    print(f"You chose: {rtype}")
+
+
+if __name__ == "__main__":
+    main()
