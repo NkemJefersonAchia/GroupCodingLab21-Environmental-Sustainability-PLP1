@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from db import DBBase
 
 class RedeemRewards(DBBase):
@@ -7,21 +8,41 @@ class RedeemRewards(DBBase):
             cur.execute("SELECT points FROM users WHERE username = %s", (username,))
             user = cur.fetchone()
             if not user:
-                print("User not found."); return
+                print("User not found.")
+                return
             points = user[0]
 
-            cur.execute("SELECT id, description, cost FROM rewards")
+            # Fetch unique rewards
+            cur.execute("""
+                SELECT DISTINCT id, description, cost
+                FROM rewards
+                ORDER BY id
+            """)
             rewards = cur.fetchall()
-            for r in rewards:
-                print(f"{r[0]}. {r[1]} - Cost: {r[2]} pts")
-
-            choice = int(input("Choose reward by ID: "))
-            cur.execute("SELECT cost FROM rewards WHERE id = %s", (choice,))
-            reward = cur.fetchone()
-            if not reward or reward[0] > points:
-                print("Invalid choice or insufficient points.")
+            if not rewards:
+                print("No rewards available.")
                 return
 
-            cur.execute("UPDATE users SET points = points - %s WHERE username = %s", (reward[0], username))
+            print("Available rewards:")
+            for rid, desc, cost in rewards:
+                print(f"{rid}. {desc} - Cost: {cost} pts")
+
+            try:
+                choice = int(input("Choose reward by ID: ").strip())
+            except ValueError:
+                print("Invalid input.")
+                return
+
+            cur.execute("SELECT cost FROM rewards WHERE id = %s LIMIT 1", (choice,))
+            reward = cur.fetchone()
+            if not reward:
+                print("Invalid reward ID.")
+                return
+            cost = reward[0]
+            if cost > points:
+                print("Insufficient points.")
+                return
+
+            cur.execute("UPDATE users SET points = points - %s WHERE username = %s", (cost, username))
             conn.commit()
-            print("Reward redeemed!")
+            print(f"Reward redeemed! You spent {cost} points.")
