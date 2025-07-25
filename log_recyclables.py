@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """Log recyclables and show RWF rate (not total cash value)."""
 
