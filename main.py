@@ -16,6 +16,7 @@ def menu(username):
     we = WasteEducation()
 
     while True:
+        print("=============================")
         print("""
 --- AFRIRECYCLE MENU ---
 1. Log Recyclables Collected
@@ -26,6 +27,7 @@ def menu(username):
 6. Waste Education
 0. Exit
 """)
+        print("=============================")
         choice = input("Select option: ").strip()
         if choice == "1":
             lr.log(username)

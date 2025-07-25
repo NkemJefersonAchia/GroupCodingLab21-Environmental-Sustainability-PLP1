@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 """Populate initial data: centers, tips, rewards."""
 
